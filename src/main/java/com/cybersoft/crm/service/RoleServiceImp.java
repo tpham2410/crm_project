@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoleServiceImp implements RoleService{
@@ -32,5 +33,43 @@ public class RoleServiceImp implements RoleService{
 
 
         return dtos;
+    }
+
+
+
+    @Override
+    public RoleEntity updatePost(int id, RoleEntity roleRequest) {
+        RoleEntity role = roleRepository.findById(id).orElseThrow();
+
+        if (role == null) {
+            return null;
+        } else {
+            role.setId(roleRequest.getId());
+            role.setName(roleRequest.getName());
+            role.setDescription(roleRequest.getDescription());
+
+            return roleRepository.save(role);
+        }
+    }
+
+//
+//    @Override
+//    public RoleEntity updatePost(int id, RoleEntity roleEnityRequest) {
+//        Optional<RoleEntity> roleEnity = roleRepository.findById(id).
+//                orElseThrow(() -> new ResourceNotFoundException("RoleEntity", "id", id)););)
+//        RoleDTO role = new RoleDTO();
+//        roleEnity.
+//        role.setId(roleEnity.get().getId());
+//        role.setName(roleEnity.get().getName());
+//        role.setDescription(roleEnity.get().getDescription());
+//
+//        roleEnity.
+//        return roleRepository.save(role);
+//    }
+
+
+    @Override
+    public void deleteRole(int id) {
+
     }
 }
