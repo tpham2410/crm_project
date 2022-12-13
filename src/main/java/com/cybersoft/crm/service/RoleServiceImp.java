@@ -38,7 +38,7 @@ public class RoleServiceImp implements RoleService{
 
 
     @Override
-    public RoleEntity updatePost(int id, RoleEntity roleRequest) {
+    public RoleEntity updateRole(int id, RoleEntity roleRequest) {
         RoleEntity role = roleRepository.findById(id).orElseThrow();
 
         if (role == null) {
@@ -52,24 +52,18 @@ public class RoleServiceImp implements RoleService{
         }
     }
 
-//
-//    @Override
-//    public RoleEntity updatePost(int id, RoleEntity roleEnityRequest) {
-//        Optional<RoleEntity> roleEnity = roleRepository.findById(id).
-//                orElseThrow(() -> new ResourceNotFoundException("RoleEntity", "id", id)););)
-//        RoleDTO role = new RoleDTO();
-//        roleEnity.
-//        role.setId(roleEnity.get().getId());
-//        role.setName(roleEnity.get().getName());
-//        role.setDescription(roleEnity.get().getDescription());
-//
-//        roleEnity.
-//        return roleRepository.save(role);
-//    }
+    @Override
+    public RoleEntity addNewRole(RoleEntity roleEntity) {
+        return roleRepository.save(roleEntity);
+    }
 
 
     @Override
     public void deleteRole(int id) {
+        RoleEntity role = roleRepository.findById(id).orElseThrow();
 
+        if (role != null) {
+            roleRepository.delete(role);
+        }
     }
 }
